@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --color-brand-primary: hsl(221, 83%, 53%);
+  --color-brand-secondary: hsl(162, 72%, 46%);
+  --color-surface: hsl(0, 0%, 100%);
+  --color-background: hsl(210, 40%, 98%);
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+}
+
+/* Explicitly enable dark mode via .dark class for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    @apply bg-white dark:bg-zinc-950 text-gray-900 dark:text-zinc-100 antialiased selection:bg-brand-primary/10;
+  }
+}
+
+.glass {
+  @apply bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md border border-white/20 dark:border-zinc-800/50 shadow-xl shadow-gray-200/50 dark:shadow-none;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary to-brand-secondary;
+}

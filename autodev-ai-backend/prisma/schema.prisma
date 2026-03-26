@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id               String    @id @default(uuid())
+  email            String    @unique
+  password         String?
+  usageCount       Int       @default(0)
+  lastUsageDate    DateTime?
+  isPro            Boolean   @default(false)
+  stripeCustomerId String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  projects         Project[]
+}
+
+model Project {
+  id                String   @id @default(uuid())
+  title             String
+  input             String
+  readme            String?  @db.Text
+  apiDocs           String?  @db.Text
+  postmanCollection String?  @db.Text
+  dbSchema          String?  @db.Text
+  deploymentGuide   String?  @db.Text
+  landingPage       String?  @db.Text
+  folderStructure   String?  @db.Text
+  envTemplate       String?  @db.Text
+  status            String   @default("PENDING") // PENDING, PROCESSING, COMPLETED, FAILED
+  isPublic          Boolean  @default(false)
+  error             String?  @db.Text
+  userId            String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
