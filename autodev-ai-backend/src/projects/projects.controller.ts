@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, UseGuards, Request, Param, Patch } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Request,
+  Param,
+  Patch,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
@@ -26,8 +35,16 @@ export class ProjectsController {
 
   @Patch(':id/public')
   @UseGuards(AuthGuard('jwt'))
-  async toggleVisibility(@Request() req: any, @Param('id') id: string, @Body('isPublic') isPublic: boolean) {
-    return this.projectsService.toggleVisibility(id, req.user.userId || req.user.sub, isPublic);
+  async toggleVisibility(
+    @Request() req: any,
+    @Param('id') id: string,
+    @Body('isPublic') isPublic: boolean,
+  ) {
+    return this.projectsService.toggleVisibility(
+      id,
+      req.user.userId || req.user.sub,
+      isPublic,
+    );
   }
 
   @Get(':id')

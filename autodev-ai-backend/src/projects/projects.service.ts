@@ -17,14 +17,18 @@ export class ProjectsService {
     if (!(user as any).isPro) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      const lastDate = (user as any).lastUsageDate ? new Date((user as any).lastUsageDate) : null;
+      const lastDate = (user as any).lastUsageDate
+        ? new Date((user as any).lastUsageDate)
+        : null;
       if (lastDate) lastDate.setHours(0, 0, 0, 0);
       let usageCount = (user as any).usageCount || 0;
       if (!lastDate || lastDate.getTime() < today.getTime()) {
         usageCount = 0;
       }
       if (usageCount >= 3) {
-        throw new Error('Daily generation limit reached (3 per day). Upgrade for more.');
+        throw new Error(
+          'Daily generation limit reached (3 per day). Upgrade for more.',
+        );
       }
       await (this.prisma.user as any).update({
         where: { id: userId },

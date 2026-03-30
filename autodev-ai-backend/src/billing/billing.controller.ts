@@ -11,14 +11,30 @@ export class BillingController {
   @Post('checkout')
   @UseGuards(AuthGuard('jwt'))
   async checkout(@Req() req: any) {
-    return this.billingService.createCheckoutSession(req.user.userId || req.user.sub);
+    return this.billingService.createCheckoutSession(
+      req.user.userId || req.user.sub,
+    );
   }
 
-  @Post('webhook')
-  async webhook(
-    @Headers('stripe-signature') signature: string, 
-    @Req() req: RawBodyRequest<Request>
-  ) {
-    return this.billingService.handleWebhook(signature, (req as any).rawBody);
+  // @Post('webhook')
+  // async webhook(
+  //   @Headers('stripe-signature') signature: string,
+  //   @Req() req: RawBodyRequest<Request>,
+  // ) {
+  //   return this.billingService.handleWebhook(signature, (req as any).rawBody);
+  // }
+
+  @Post('upgrade-local')
+  @UseGuards(AuthGuard('jwt'))
+  async upgradeLocal(@Req() req: any) {
+    return this.billingService.upgradeUserLocally(req.user.userId || req.user.sub);
+  }
+
+  @Post('portal')
+  @UseGuards(AuthGuard('jwt'))
+  async portal(@Req() req: any) {
+    return this.billingService.createPortalSession(
+      req.user.userId || req.user.sub,
+    );
   }
 }

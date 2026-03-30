@@ -57,4 +57,11 @@ export class AuthService {
       throw new UnauthorizedException('Invalid token');
     }
   }
+
+  async updateProfile(userId: string, data: { name?: string; bio?: string }) {
+    return (this.prisma.user as any).update({
+      where: { id: userId },
+      data,
+    });
+  }
 }
