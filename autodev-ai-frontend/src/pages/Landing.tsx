@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
 import { 
-  Code, Zap, FileText, Database, Globe, ArrowRight, GitBranch, 
-  Terminal, ShieldCheck, Star, 
-  CheckCircle2, LayoutTemplate, Rocket 
+  Code, Zap, FileText, Database, Globe, ArrowRight,
+  Terminal, Star, CheckCircle2, LayoutTemplate, Rocket 
 } from 'lucide-react';
-import Button from '../components/ui/Button';
 import autoDevLogo from '../assets/AutoDev AI logo.png';
 import ThemeToggle from '../components/ui/ThemeToggle'; // Added ThemeToggle
 
